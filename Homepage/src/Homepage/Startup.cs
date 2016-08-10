@@ -22,18 +22,15 @@ namespace Homepage
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDefaultFiles();
-                app.UseDeveloperExceptionPage();
-                app.UseStaticFiles();
-            }
             
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseDefaultFiles();
+            app.UseDeveloperExceptionPage();
+            app.UseStaticFiles();
+                        
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
         }
     }
 }
