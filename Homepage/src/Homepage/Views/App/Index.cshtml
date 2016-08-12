@@ -1,0 +1,24 @@
+﻿@model Homepage.ViewModels.Login
+
+@{ 
+    ViewBag.Title = "Home";
+}
+
+    <div id="main">
+        <h1>Please, login!</h1>
+        <form method="post">
+            <div>
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName"/>
+                <span asp-validation-for="UserName"></span>
+            </div>
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div id="submit">
+                <input type="submit" />
+            </div>
+        </form>
+    </div>

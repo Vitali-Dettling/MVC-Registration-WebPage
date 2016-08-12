@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Panna - @ViewBag.Title</title>
+
+    <meta charset="utf-8" />
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+</head>
+<body>
+
+    <header id="header">
+        <ul>
+            <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
+            <li><a asp-controller="App" asp-action="Register">Sign-Up</a></li>
+            <li><a asp-controller="App" asp-action="About">About</a></li>
+        </ul>
+    </header>
+
+    <!--Injects the spezific content of a website (App)-->
+    @RenderBody();
+
+    <footer id="footer">
+        <a>&copy; 2016 Wirtschaftsingenieurbüro J.C. Fiebig</a>
+    </footer>
+
+    <!--Renders scripts to all website if needed-->
+    @RenderSection("script", false);
+
+</body>
+</html>
