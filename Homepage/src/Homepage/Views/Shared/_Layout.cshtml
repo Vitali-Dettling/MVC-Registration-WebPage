@@ -21,15 +21,15 @@
         </ul>
     </header>
 
-    <!--Injects the spezific content of a website (App)-->
-    @RenderBody();
+    <!--Injects the spezific content of a page from the website -->
+    @RenderBody()
 
     <footer id="footer">
         <a>&copy; 2016 Wirtschaftsingenieurbüro J.C. Fiebig</a>
     </footer>
 
     <!--Renders scripts to all website if needed-->
-    @RenderSection("script", false);
+    @RenderSection("script", false)
 
 </body>
 </html>

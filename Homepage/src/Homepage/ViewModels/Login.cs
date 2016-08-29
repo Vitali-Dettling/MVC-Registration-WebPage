@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace Homepage.ViewModels
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "User Name:")]
-        public string UserName { get; set; }
-       
+        [JsonProperty("Email")]
+        [Display(Name = "Email:")]
+        public string Email { get; set; }
+
         [Required]
+        [JsonProperty("Password")]
         [StringLength(18, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$")]
         [DataType(DataType.Password)]
