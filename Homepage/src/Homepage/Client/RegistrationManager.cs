@@ -8,19 +8,29 @@ using System.Net.Http;
 using Homepage.ViewModels;
 using System.Text;
 using System.Net;
+using Homepage.Controllers.Web;
+using Homepage.Utils;
+using static Homepage.Controllers.Web.WebRequests;
 
 namespace Homepage.Client
 {
     public class RegistrationManager : Controller, IServices
     {
+        private IWebRequests requests;
+
+        public RegistrationManager(IWebRequests webRequests)
+        {
+            requests = webRequests;
+        }
 
         public async Task<IActionResult> GetRegistrationsList()
         {
             using (var httpClient = new HttpClient())
             {
-                var GetRegistrationsURL = new Uri("http://registrationmanager-01.azurewebsites.net/api/registrations");
 
-                var response = await httpClient.GetAsync(GetRegistrationsURL);
+                //var GetRegistrationsURL = new Uri("http://registrationmanager-01.azurewebsites.net/api/registrations");
+
+                var response = await httpClient.GetAsync(requests.GetAllRegistrationsUrl());
 
                 if (response.StatusCode != HttpStatusCode.BadRequest)
                 {
@@ -34,7 +44,9 @@ namespace Homepage.Client
         {
             using (var httpClient = new HttpClient())
             {
-                var PostRegisterURL = new Uri("http://registrationmanager-01.azurewebsites.net/api/registration");
+                //var PostRegisterURL = new Uri("http://registrationmanager-01.azurewebsites.net/api/registration");
+
+                var PostRegisterURL = requests.PostRegistrationUrl();
 
                 var check = Newtonsoft.Json.JsonConvert.SerializeObject(
                     new { Email = email, Password = newPassword, ConfirmPassword = confirmPassword }
@@ -54,8 +66,10 @@ namespace Homepage.Client
         public async Task<IActionResult> SendLogin(string email, string password)
         {
             using (var httpClient = new HttpClient())
-            {   
-                var GetLoginCheck = new Uri("http://registrationmanager-01.azurewebsites.net/api/login");
+            {
+                //var GetLoginCheck = new Uri("http://registrationmanager-01.azurewebsites.net/api/login");
+
+                var GetLoginCheck = requests.GetLoginUrl();
 
                 var check = Newtonsoft.Json.JsonConvert.SerializeObject(
                    new { Email = email, Password = password }

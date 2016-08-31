@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Homepage.Client;
+using Homepage.Controllers.Web;
+using Homepage.Utils;
 
 namespace Homepage
 {
@@ -19,6 +21,7 @@ namespace Homepage
         {
             //Registation of external services
             services.AddScoped<IServices, RegistrationManager>();
+            services.AddScoped<IWebRequests, WebRequests>();
             services.AddMvc();
         }
 

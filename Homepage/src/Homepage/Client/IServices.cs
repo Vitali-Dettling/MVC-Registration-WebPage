@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Homepage.Client
 {
-    interface IServices 
+    public interface IServices
     {
         Task<IActionResult> GetRegistrationsList();
 

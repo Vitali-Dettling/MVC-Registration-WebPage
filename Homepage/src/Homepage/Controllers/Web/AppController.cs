@@ -12,9 +12,9 @@ namespace Homepage.Controllers.Web
     {
         private IServices services;
 
-        public AppController()
+        public AppController(IServices registrationManager)
         {
-            services = new RegistrationManager();
+            services = registrationManager;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Homepage.Controllers.Web
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Index(Login login)
         {
             //Additional check can be made here, eg.: model.Email.Contains("aol.com")
