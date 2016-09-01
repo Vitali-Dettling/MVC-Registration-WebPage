@@ -28,8 +28,6 @@ namespace Homepage.Client
             using (var httpClient = new HttpClient())
             {
 
-                //var GetRegistrationsURL = new Uri("http://registrationmanager-01.azurewebsites.net/api/registrations");
-
                 var response = await httpClient.GetAsync(requests.GetAllRegistrationsUrl());
 
                 if (response.StatusCode != HttpStatusCode.BadRequest)
@@ -44,16 +42,12 @@ namespace Homepage.Client
         {
             using (var httpClient = new HttpClient())
             {
-                //var PostRegisterURL = new Uri("http://registrationmanager-01.azurewebsites.net/api/registration");
-
-                var PostRegisterURL = requests.PostRegistrationUrl();
-
                 var check = Newtonsoft.Json.JsonConvert.SerializeObject(
                     new { Email = email, Password = newPassword, ConfirmPassword = confirmPassword }
                     );
                 HttpContent contentPost = new StringContent(check, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync(PostRegisterURL, contentPost);
+                var response = await httpClient.PostAsync(requests.PostRegistrationUrl(), contentPost);
 
                 if (response.StatusCode == HttpStatusCode.Created)
                 {
@@ -67,16 +61,12 @@ namespace Homepage.Client
         {
             using (var httpClient = new HttpClient())
             {
-                //var GetLoginCheck = new Uri("http://registrationmanager-01.azurewebsites.net/api/login");
-
-                var GetLoginCheck = requests.GetLoginUrl();
-
                 var check = Newtonsoft.Json.JsonConvert.SerializeObject(
                    new { Email = email, Password = password }
                    );
                 HttpContent contentPost = new StringContent(check, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync(GetLoginCheck, contentPost);
+                var response = await httpClient.PostAsync(requests.GetLoginUrl(), contentPost);
                 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {

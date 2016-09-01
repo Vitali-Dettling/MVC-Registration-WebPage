@@ -42,15 +42,14 @@ namespace Homepage.Controllers.Web
             {
                 //TODO Automate URL builder via VS 2015 settings.
                 url.Host = "localhost";
-                url.Port = 49227;
+                url.Port = 60647;
             }
             else
             {
                 url.Host = "registrationmanager-01.azurewebsites.net";
             }
 
-            string terst = url.Path = path;
-
+            url.Path = path;
             return url.ToString();
         }
 
