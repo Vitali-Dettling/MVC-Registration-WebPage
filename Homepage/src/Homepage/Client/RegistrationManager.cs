@@ -48,7 +48,7 @@ namespace Homepage.Client
                 HttpContent contentPost = new StringContent(check, Encoding.UTF8, "application/json");
 
                 var response = await httpClient.PostAsync(requests.PostRegistrationUrl(), contentPost);
-
+                
                 if (response.StatusCode == HttpStatusCode.Created)
                 {
                     return Created($"api/registration/{email}", email);

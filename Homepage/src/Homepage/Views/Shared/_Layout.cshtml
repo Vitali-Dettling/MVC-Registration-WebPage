@@ -8,28 +8,45 @@
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css" />
+    <!--Customise how the bootstrape looks like. site.cc overrides bootstrape.-->
     <link rel="stylesheet" href="~/css/site.css" type="text/css" />
 </head>
 <body>
-
-    <header id="header">
-        <ul>
-            <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
-            <li><a asp-controller="App" asp-action="Register">Sign-Up</a></li>
-            <li><a asp-controller="App" asp-action="About">About</a></li>
+    <header id="header" class="container-fluid">
+        <ul class="nav">
+            <li class="active">
+                <a asp-controller="App" asp-action="Index">Home</a>
+            </li>
+            <li>
+                <a asp-controller="App" asp-action="Register">Sign-Up</a>
+            </li>
+            <li>
+                <a asp-controller="App" asp-action="About">About</a>
+            </li>
         </ul>
     </header>
 
-    <!--Injects the spezific content of a page from the website -->
-    @RenderBody()
+    <div class="row">
+        <!--Should be at the center of the page-->
+        <div class="col-lg-offset-4 col-lg-3">
 
-    <footer id="footer">
-        <a>&copy; 2016 Wirtschaftsingenieurbüro J.C. Fiebig</a>
+            <!--Injects the spezific content of a page from the website -->
+            @RenderBody()
+
+        </div>
+    </div>
+
+    <footer id="footer" class="container-fluid">
+        <div class="navbar navbar-fixed-bottom">
+            <h5 class="text-center text-info">&copy; 2016 Wirtschaftsingenieurbüro J.C. Fiebig</h5>
+        </div>
     </footer>
 
     <!--Renders scripts to all website if needed-->
     @RenderSection("script", false)
-
 </body>
 </html>

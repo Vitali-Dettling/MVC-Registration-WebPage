@@ -29,6 +29,19 @@ namespace Homepage.Controllers.Web
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Logout(Login login)
+        {
+            return Redirect("Index");
+        }
+
+
         [HttpPost]
         public IActionResult Index(Login login)
         {
@@ -45,7 +58,10 @@ namespace Homepage.Controllers.Web
                         Email = login.Email,
                         Password = login.Password,
                     };
-                    return View(newLogin);
+
+                    //TODO only redirect if the login was successfull
+                    //TODO Bug second time logout does not work!
+                    return Redirect("App/Logout");
                 }   
             }
             return View();
