@@ -22,22 +22,8 @@ namespace Homepage.Client
             requests = webRequests;
         }
 
-        public async Task<HttpStatusCode> GetRegistrationsList()
-        {
-            using (var httpClient = new HttpClient())
-            {
 
-                var response = await httpClient.GetAsync(requests.GetAllRegistrationsUrl());
-
-                if (response.StatusCode != HttpStatusCode.BadRequest)
-                {
-                    return HttpStatusCode.OK;
-                }
-            }
-            return HttpStatusCode.BadRequest;
-        }
-
-        public async Task<HttpStatusCode> SendRegistration(string email, string newPassword, string confirmPassword)
+        public async Task<HttpResponseMessage> SendRegistration(string email, string newPassword, string confirmPassword)
         {
             using (var httpClient = new HttpClient())
             {
@@ -46,17 +32,11 @@ namespace Homepage.Client
                     );
                 HttpContent contentPost = new StringContent(check, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync(requests.PostRegistrationUrl(), contentPost);
-                
-                if (response.StatusCode == HttpStatusCode.Created)
-                {
-                    return HttpStatusCode.Created;
-                }
+                return await httpClient.PostAsync(requests.PostRegistrationUrl(), contentPost);
             }
-            return HttpStatusCode.BadRequest;
         }
 
-        public async Task<HttpStatusCode> SendLogin(string email, string password)
+        public async Task<HttpResponseMessage> SendLogin(string email, string password)
         {
             using (var httpClient = new HttpClient())
             {
@@ -65,13 +45,7 @@ namespace Homepage.Client
                    );
                 HttpContent contentPost = new StringContent(check, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync(requests.GetLoginUrl(), contentPost);
-                
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    return HttpStatusCode.OK;
-                }
-                return HttpStatusCode.BadRequest;
+                return await httpClient.PostAsync(requests.GetLoginUrl(), contentPost);
             }
         }
     }
