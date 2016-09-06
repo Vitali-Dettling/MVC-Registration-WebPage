@@ -10,7 +10,6 @@ using System.Text;
 using System.Net;
 using Homepage.Controllers.Web;
 using Homepage.Utils;
-using static Homepage.Controllers.Web.WebRequests;
 
 namespace Homepage.Client
 {
@@ -23,7 +22,7 @@ namespace Homepage.Client
             requests = webRequests;
         }
 
-        public async Task<IActionResult> GetRegistrationsList()
+        public async Task<HttpStatusCode> GetRegistrationsList()
         {
             using (var httpClient = new HttpClient())
             {
@@ -32,13 +31,13 @@ namespace Homepage.Client
 
                 if (response.StatusCode != HttpStatusCode.BadRequest)
                 {
-                    return Ok(response);
+                    return HttpStatusCode.OK;
                 }
             }
-            return BadRequest("Internal server error");
+            return HttpStatusCode.BadRequest;
         }
 
-        public async Task<IActionResult> SendRegistration(string email, string newPassword, string confirmPassword)
+        public async Task<HttpStatusCode> SendRegistration(string email, string newPassword, string confirmPassword)
         {
             using (var httpClient = new HttpClient())
             {
@@ -51,13 +50,13 @@ namespace Homepage.Client
                 
                 if (response.StatusCode == HttpStatusCode.Created)
                 {
-                    return Created($"api/registration/{email}", email);
+                    return HttpStatusCode.Created;
                 }
             }
-            return BadRequest("Registration did not work! (Internal server error)");
+            return HttpStatusCode.BadRequest;
         }
 
-        public async Task<IActionResult> SendLogin(string email, string password)
+        public async Task<HttpStatusCode> SendLogin(string email, string password)
         {
             using (var httpClient = new HttpClient())
             {
@@ -70,9 +69,9 @@ namespace Homepage.Client
                 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    return Ok(response);
+                    return HttpStatusCode.OK;
                 }
-                return BadRequest("Wrong Credentials! Please try again");
+                return HttpStatusCode.BadRequest;
             }
         }
     }

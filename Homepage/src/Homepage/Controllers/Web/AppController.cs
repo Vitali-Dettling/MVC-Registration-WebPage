@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Homepage.ViewModels;
 using Homepage.Client;
+using System.Net;
+using System.Net.Http;
 
 namespace Homepage.Controllers.Web
 {
@@ -30,17 +32,16 @@ namespace Homepage.Controllers.Web
         }
 
         [HttpGet]
-        public IActionResult Logout()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public IActionResult Logout(Login login)
         {
-            return Redirect("Index");
+            if (login.Email != null &&
+                login.Password != null)
+            {
+                return View(login);
+            }
+        
+            return Redirect("Index"); 
         }
-
 
         [HttpPost]
         public IActionResult Index(Login login)
@@ -48,23 +49,15 @@ namespace Homepage.Controllers.Web
             //Additional check can be made here, eg.: model.Email.Contains("aol.com")
             if (ModelState.IsValid)
             {
-                var result = services.SendLogin(login.Email, login.Password);
+                Task<HttpStatusCode> result = services.SendLogin(login.Email, login.Password);
 
-                //Required the same model (@model Homepage.ViewModels.Login) from the site needs to be returned.
-                if (!result.IsFaulted)
+                if (result.Result == HttpStatusCode.OK)
                 {
-                    var newLogin = new Login()
-                    {
-                        Email = login.Email,
-                        Password = login.Password,
-                    };
-
-                    //TODO only redirect if the login was successfull
-                    //TODO Bug second time logout does not work!
-                    return Redirect("App/Logout");
-                }   
+                    return RedirectToAction("Logout", login);
+                }  
             }
-            return View();
+            //TODO Commend BadRequest("Wrong Credentials! Please try again");
+            return View(login);
         }
 
         /// <summary>
@@ -85,21 +78,25 @@ namespace Homepage.Controllers.Web
             //Additional check can be made here, eg.: model.Email.Contains("aol.com")
             if (ModelState.IsValid)
             {
-                var result = services.SendRegistration(register.Email, register.Password, register.ConfirmPassword);
+                var result = services.SendRegistration(register.Email, register.Password, register.ConfirmPassword).Result;
                 
-                if (!result.IsFaulted)
+                if (result == HttpStatusCode.Created)
                 {
+                    //TODO  Created($"api/registration/{email}", email);
+
                     //Required the same model (@model Homepage.ViewModels.Register) from the site needs to be returned.
-                    var newRegistration = new Register()
-                    {
-                        Email = register.Email,
-                        Password = register.Password,
-                        ConfirmPassword = register.ConfirmPassword
-                    };
-                    return View(newRegistration);
+                    //TODO ????
+                    //var newRegistration = new Register()
+                    //{
+                    //    Email = register.Email,
+                    //    Password = register.Password,
+                    //    ConfirmPassword = register.ConfirmPassword
+                    //};
+                    return View(register);
                 }
                 
             }
+            //TODO BadRequest("Registration did not work! (Internal server error)");
             return View();
         }
 
@@ -118,7 +115,9 @@ namespace Homepage.Controllers.Web
         [HttpGet("registrations")]
         public IActionResult Get()
         {
+            //TODO 
             var result = services.GetRegistrationsList();
+            //TODO  BadRequest("Internal server error");
             return View(result);
         }
     }
