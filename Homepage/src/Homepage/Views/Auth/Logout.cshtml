@@ -1,14 +1,12 @@
-﻿@model Homepage.ViewModels.Login
-
-@{ 
-    ViewBag.Title = "Home";
+﻿@{ 
+    ViewBag.Title = "Logout";
 }
 
     <div id="main">
         <h1>Please, logout!</h1>
 
-        <form method="get">
-            <div id="submit">
+        <form method="get" action="Login">
+            <div class="form-group">
                 <input type="submit" class="btn btn-info" value="Logout">
             </div>
         </form>

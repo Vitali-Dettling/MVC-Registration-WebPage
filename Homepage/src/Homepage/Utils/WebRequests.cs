@@ -19,9 +19,9 @@ namespace Homepage.Controllers.Web
             env = environment;
         }
         
-        public string GetAllRegistrationsUrl()
+        public string GetLoginUrl()
         {
-            return URL(GetUrlQuery(UrlQuery.registrations));
+            return URL(GetUrlQuery(UrlQuery.login));
         }
 
         public string PostRegistrationUrl()
@@ -29,9 +29,9 @@ namespace Homepage.Controllers.Web
             return URL(GetUrlQuery(UrlQuery.registration));
         }
 
-        public string GetLoginUrl()
+        public string GetIsAuthenticatedUrl()
         {
-            return URL(GetUrlQuery(UrlQuery.login));
+            return URL(GetUrlQuery(UrlQuery.authenticated));
         }
 
         private string URL(string path)
@@ -53,16 +53,6 @@ namespace Homepage.Controllers.Web
             return url.ToString();
         }
 
-        private enum UrlQuery
-        {
-            [Description("/api/registrations")]
-            registrations,
-            [Description("/api/registration")]
-            registration,
-            [Description("/api/login")]
-            login,
-        }
-
         private static string GetUrlQuery(Enum UrlQuery)
         {
             FieldInfo fi = UrlQuery.GetType().GetField(UrlQuery.ToString());
@@ -74,6 +64,16 @@ namespace Homepage.Controllers.Web
                 return attributes[0].Description;
             else
                 return UrlQuery.ToString();
+        }
+
+        private enum UrlQuery
+        {
+            [Description("/api/authenticated")]
+            authenticated,
+            [Description("/api/registration")]
+            registration,
+            [Description("/api/login")]
+            login,
         }
     }
 }

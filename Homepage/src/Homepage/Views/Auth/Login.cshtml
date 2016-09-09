@@ -1,11 +1,11 @@
-﻿<!-- @model Homepage.ViewModels.Login
+﻿@model Homepage.ViewModels.Login
 
-@{ 
+@{
     ViewBag.Title = "Home";
 }
 
     <h1>Please, login!</h1>
-    <form method="post">
+    <form method="post" novalidate>
         <div class="form-group">
             <label>Email:</label>
             <input asp-for="Email" class="form-control" />
@@ -16,8 +16,7 @@
             <input asp-for="Password" class="form-control" />
             <span asp-validation-for="Password" />
         </div>
-        <div>
+        <div class="form-group">
             <input type="submit" class="btn btn-info" value="Login">
         </div>
-    </form>  -->
-
+    </form>

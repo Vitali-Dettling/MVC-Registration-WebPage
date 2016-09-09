@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Homepage.ViewModels
 {
     public class Register : Login
     {
-
         [Required]
         [StringLength(18, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$")]

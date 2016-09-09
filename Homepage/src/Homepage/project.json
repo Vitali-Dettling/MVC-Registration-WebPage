@@ -14,7 +14,8 @@
         "Microsoft.AspNetCore.Mvc": "1.0.0",
         "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
         "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.0",
-        "Microsoft.Net.Http": "2.2.29"
+        "Microsoft.Net.Http": "2.2.29",
+        "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0"
     },
 
   "tools": {

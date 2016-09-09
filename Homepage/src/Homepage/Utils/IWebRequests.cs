@@ -7,10 +7,10 @@ namespace Homepage.Utils
 {
     public interface IWebRequests
     {
-        string GetAllRegistrationsUrl();
-
         string PostRegistrationUrl();
 
         string GetLoginUrl();
+
+        string GetIsAuthenticatedUrl();
     }
 }
