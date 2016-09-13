@@ -11,6 +11,8 @@ using System.Net;
 using Homepage.Controllers.Web;
 using Homepage.Utils;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace Homepage.Client
 {
@@ -27,9 +29,10 @@ namespace Homepage.Client
         {
             using (var httpClient = new HttpClient())
             {
-                var check = Newtonsoft.Json.JsonConvert.SerializeObject(
+                var check = JsonConvert.SerializeObject(
                    new { Email = email, Password = password }
                    );
+
                 var contentPost = new StringContent(check, Encoding.UTF8, "application/json");
 
                 return await httpClient.PostAsync(requests.GetLoginUrl(), contentPost);
@@ -39,10 +42,11 @@ namespace Homepage.Client
         {
             using (var httpClient = new HttpClient())
             {
-                var check = Newtonsoft.Json.JsonConvert.SerializeObject(
+                var newRegistration = JsonConvert.SerializeObject(
                     new { Email = email, Password = newPassword, ConfirmPassword = confirmPassword }
                     );
-                var contentPost = new StringContent(check, Encoding.UTF8, "application/json");
+
+                var contentPost = new StringContent(newRegistration, Encoding.UTF8, "application/json");
 
                 return await httpClient.PostAsync(requests.PostRegistrationUrl(), contentPost);
             }

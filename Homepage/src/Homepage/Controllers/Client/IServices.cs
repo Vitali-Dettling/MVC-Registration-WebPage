@@ -12,8 +12,8 @@ namespace Homepage.Client
 {
     public interface IServices
     {
-        Task<HttpResponseMessage> SendRegistration(string email, string password, string confirmPassword);
-
         Task<HttpResponseMessage> SendLogin(string userName, string password);
+
+        Task<HttpResponseMessage> SendRegistration(string email, string password, string confirmPassword);
     }
 }

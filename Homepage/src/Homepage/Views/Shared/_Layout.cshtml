@@ -4,49 +4,81 @@
     <title>Panna - @ViewBag.Title</title>
 
     <meta charset="utf-8" />
+    <meta name="Panna Homepage" content="width=device-width, initial-scale=1.0" />
 
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+   <environment names="Development">
+       <link rel="stylesheet" 
+             href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css" />
-    <!--Customise how the bootstrape looks like. site.cc overrides bootstrape.-->
-    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+       <script src="~/lib/jquery/dist/jquery.js"></script>
+       <script src="~/lib/bootstrap/dist/js/bootstrap.min.css"></script>
+
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" 
+              href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" 
+              asp-fallback-test-property="position" 
+              asp-fallback-test-value="absolute" />
+       
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.css"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+    </environment>
+    
+    <!--Customise how the bootstrape looks like. site.css overrides bootstrape.-->
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          type="text/css"
+          asp-append-version="true" />
+
+    <script type="text/javascript"
+            src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" 
+            src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 </head>
 <body>
-    <header id="header" class="container-fluid">
-        <ul class="nav">
-            <li class="active">
-                <a asp-controller="App" asp-action="Index">Home</a>
-            </li>
-            <li>
-                <a asp-controller="App" asp-action="Register">Sign-Up</a>
-            </li>
-            <li>
-                <a asp-controller="App" asp-action="About">About</a>
-            </li>
-        </ul>
-    </header>
-
-    <div class="row">
-        <!--Should be at the center of the page-->
-        <div class="col-lg-offset-4 col-lg-3">
-
-            <!--Injects the spezific content of a page from the website -->
-            @RenderBody()
-
+    <!--Navigation bar is horinzontal-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a asp-controller="App" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    <a asp-controller="App" asp-action="Register">Sign-Up</a>
+                </li>
+                <li>
+                    <a asp-controller="App" asp-action="About">About</a>
+                </li>
+            </ul>
         </div>
-    </div>
+     </nav>
 
-    <footer id="footer" class="container-fluid">
-        <div class="navbar navbar-fixed-bottom">
-            <h5 class="text-center text-info">&copy; 2016 Wirtschaftsingenieurbüro J.C. Fiebig</h5>
+        <div class="row">
+            <!--Middle of the page. (5 offset, 2 content, 5 rest)-->
+            <div class="col-md-2 col-md-offset-5">
+                <!--Injects the spezific content of a page from the website -->
+                @RenderBody()
+
+            </div>
         </div>
-    </footer>
 
-    <!--Renders scripts to all website if needed-->
-    @RenderSection("script", false)
+        <footer class="container-fluid">
+            <div class="navbar navbar-fixed-bottom">
+                <h5 class="text-center text-info">&copy; 2016 Wirtschaftsingenieurbüro J.C. Fiebig</h5>
+            </div>
+        </footer>
+
+        <!--Renders scripts to all website if needed-->
+        @RenderSection("script", false)
+
 </body>
 </html>

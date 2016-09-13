@@ -15,7 +15,8 @@
         "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
         "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.0",
         "Microsoft.Net.Http": "2.2.29",
-        "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0"
+        "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+        "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0"
     },
 
   "tools": {
@@ -45,8 +46,8 @@
   "publishOptions": {
     "include": [
         "wwwroot",
-        "web.config",
-        "Views"
+        "Views",
+        "web.config"
     ]
   },
 
