@@ -68,4 +68,6 @@
 #
 # https://github.com/github/linguist#overrides
 ###############################################################################
-#*.rb linguist-language=PowerShell 
+#*.rb linguist-language=C#
+# 
+# Homepage/src/Homepage/Properties/PublishProfiles/ linguist-vendored
