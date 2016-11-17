@@ -70,4 +70,5 @@
 ###############################################################################
 #*.rb linguist-language=C#
 # 
-# Homepage/src/Homepage/Properties/PublishProfiles/ linguist-vendored=fase
+# Homepage/src/Homepage/Properties/PublishProfiles/ linguist-vendored
+# *.pubxml linguist-vendored=false
