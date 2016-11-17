@@ -71,4 +71,4 @@
 #*.rb linguist-language=C#
 # 
 # special-vendored-path/* linguist-vendored
-# jquery.js linguist-vendored=false
+# Homepage/src/Homepage/Properties/PublishProfiles/* linguist-vendored=false
