@@ -68,4 +68,7 @@
 #
 # https://github.com/github/linguist#overrides
 ###############################################################################
-# Homepage/src/Homepage/Properties/PublishProfiles/* linguist-vendored=false
+#*.rb linguist-language=C#
+# 
+# special-vendored-path/* linguist-vendored
+# Homepage/src/Homepage/Properties/PublishProfiles/* linguist-vendored=true
